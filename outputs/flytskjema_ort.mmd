@@ -1,0 +1,45 @@
+flowchart TD
+    A[Henvisning mottas<br/>(GP/andre)] --> B[Poliklinikk-sekretær<br/>mottar henvisning]
+    B --> C[Vurdering av lege<br/>(Poliklinikk)]
+    C --> D{Vurdering: Poliklinikk først<br/>eller direkte operasjon?}
+    D -- Poliklinikk først --> E[Poliklinikk-konsultasjon]
+    E --> F[Operatørbeslutning utfylles]
+    D -- Direkte operasjon --> F
+
+    %% Operatørbeslutning og arbeidsflyt
+    F --> G[Operatørbeslutning inn i LHK-mappe]
+    G --> H[Arbeidsgruppe: Ortelektivoperasjon Tromsø<br/>(+ ev. egen for dagkirurgi)]
+    H --> I[Ny operasjon er opprettet av lege<br/>(i Poliklinikk)]
+
+    %% Planlegger knytter sammen og kvalitetssikrer
+    I --> J[Planlegger åpner henvisning/operasjonsbilde]
+    J --> K[Knytt operasjon og henvisning sammen<br/>("opprett-... møte")]
+    K --> L[Kontroller metadata:<br/>omsorgsnivå, avdeling, post,<br/> lokalisering, diagnosegruppe, kontakt]
+    L --> M{Direkte sette opp time<br/>eller tentativ måned?}
+
+    %% Direkte time
+    M -- Direkte time --> N[Finn ledig slot]
+    N --> O[Sett stue, operatør, utstyr,<br/>start/slutt-tider]
+    O --> P[Planleggingskommentar og sjekk utstyr]
+    P --> Q[Innkallingsbrev til pasient]
+    Q --> R{Pasient kan møte?}
+    R -- Ja --> S[På operasjonsprogram]
+    R -- Nei --> N
+
+    %% Tentativ måned
+    M -- Tentativ måned --> T[Sett tentativ måned]
+    T --> U[Pasient på venteliste<br/>(pasientliste/venteliste/<br/>operasjonsventeliste)]
+    U --> V[Ventelistebrev sendes]
+    V --> W[Hent pasient fra venteliste<br/>ved kapasitet]
+    W --> O
+
+    %% Kontrollpunkt (gulapp)
+    L --> X{Uklart/uvanlig?<br/>Feil operatør/indikasjon?}
+    X -- Ja --> Y[Send "gulapp" til riktig lege<br/>for avklaring før brev]
+    Y --> L
+    X -- Nei --> M
+
+    %% Ressurser/utstyr/program
+    O --> Z{Har vi riktig utstyr,<br/>programtype, stue?}
+    Z -- Ja --> Q
+    Z -- Nei --> AA[Koordiner med lege om bestilling/<br/>velg passende dag/stue] --> O
