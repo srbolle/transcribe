@@ -224,6 +224,7 @@ def transcribe(
     language: Optional[str] = None,
     beam_size: int = 5,
     compute_type: str = "auto",
+    device: str = "auto",
     vad_filter: bool = True,
     diarize: bool = False,
     num_speakers: Optional[int] = None,
@@ -231,8 +232,12 @@ def transcribe(
     if not os.path.isfile(input_path):
         raise FileNotFoundError(f"Input not found: {input_path}")
 
-    # Initialize WhisperModel (auto-detect GPU)
-    model = WhisperModel(model_size, device="auto", compute_type=compute_type)
+    # Initialize WhisperModel (auto-detect GPU) with safe fallback to CPU
+    try:
+        model = WhisperModel(model_size, device=device, compute_type=compute_type)
+    except Exception as e:
+        print(f"Whisper initialization failed with device='{device}' ({e}). Falling back to CPU...", file=sys.stderr)
+        model = WhisperModel(model_size, device="cpu", compute_type="int8" if compute_type == "auto" else compute_type)
 
     # Transcription
     segments_gen, info = model.transcribe(
@@ -279,6 +284,7 @@ def main():
     parser.add_argument("--language", default="auto", help="Language code or 'auto'")
     parser.add_argument("--beam-size", type=int, default=5, help="Beam size for decoding")
     parser.add_argument("--compute-type", default="auto", help="Compute type: auto, float16, float32, int8, etc.")
+    parser.add_argument("--device", default="auto", help="Device: auto, cpu, or cuda")
     parser.add_argument("--no-vad", action="store_true", help="Disable VAD filter")
     parser.add_argument("--diarize", action="store_true", help="Enable speaker diarization (no-HF by default; pyannote if HUGGINGFACE_TOKEN set)")
     parser.add_argument("--num-speakers", type=int, default=None, help="Known number of speakers (optional)")
@@ -295,6 +301,7 @@ def main():
         language=args.language,
         beam_size=args.beam_size,
         compute_type=args.compute_type,
+        device=args.device,
         vad_filter=not args.no_vad,
         diarize=args.diarize,
         num_speakers=args.num_speakers,
