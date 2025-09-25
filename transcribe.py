@@ -148,7 +148,12 @@ def diarize_by_embeddings(audio_path: str, utterances: List[Utterance], num_spea
     try:
         # Load audio once
         wav, sr = librosa.load(audio_path, sr=16000, mono=True)
-        encoder = VoiceEncoder()
+        # Force CPU to avoid cuDNN / CUDA requirements for diarization
+        try:
+            encoder = VoiceEncoder(device="cpu")
+        except TypeError:
+            # Older resemblyzer versions may not support the device kwarg explicitly
+            encoder = VoiceEncoder()
         # Compute embedding per utterance using its time span
         embs = []
         valid_idx = []

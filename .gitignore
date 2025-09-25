@@ -8,3 +8,15 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Audio recordings (ignore sound files)
+soundfiles/
+*.mp3
+*.wav
+*.wma
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.opus
+*.WMA
