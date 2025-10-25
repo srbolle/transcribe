@@ -1,0 +1,49 @@
+graph TD
+    %% Henvisning og mottak
+    A[Henvisning mottas] --> B[Sekretaer pa poliklinikk mottar henvisning]
+    B --> C[Vurdering av lege pa poliklinikk]
+    C --> D{Poliklinikk forst eller direkte operasjon}
+    D -- Poliklinikk forst --> E[Poliklinikk konsultasjon]
+    D -- Direkte operasjon --> F[Operatorbeslutning fylles ut]
+    E --> F[Operatorbeslutning fylles ut]
+
+    %% Operatorbeslutning og flyt
+    F --> G[Operatorbeslutning til LHK mappe]
+    G --> H[Arbeidsgruppe - Ortelektivoperasjon Tromso]
+    H --> I[Ny operasjon er opprettet av lege i poliklinikk]
+
+    %% Planlegger knytter og kvalitetssikrer
+    I --> J[Planlegger apner henvisning og operasjonsbilde]
+    J --> K[Knytt operasjon og henvisning sammen - opprett mote]
+    K --> L[Kontroller metadata - omsorgsnivaa avdeling post lokalisering diagnosegruppe kontakt]
+    L --> M{Direkte time eller tentativ maaned}
+
+    %% Direkte time
+    M -- Direkte time --> N[Finn ledig slot]
+    N --> O[Sett stue operator utstyr start og slutt]
+    O --> P[Planleggingskommentar og sjekk utstyr]
+    P --> Q[Send innkallingsbrev til pasient]
+    Q --> R{Kan pasient mote}
+    R -- Ja --> S[Pa operasjonsprogram]
+    R -- Nei --> N
+
+    %% Tentativ maaned og venteliste
+    M -- Tentativ maaned --> T[Sett tentativ maaned]
+    T --> U[Pasient pa venteliste]
+    U --> V[Ventelistebrev sendes]
+    V --> W[Hent pasient fra venteliste ved kapasitet]
+    W --> O
+
+    %% Kontrollpunkt - gulapp
+    L --> X{Uklart eller uvanlig - feil operator eller indikasjon}
+    X -- Ja --> Y[Send gulapp til riktig lege for avklaring for brev]
+    Y --> L
+    X -- Nei --> M
+
+    %% Ressurser og program
+    O --> Z{Riktig utstyr programtype stue}
+    Z -- Ja --> Q
+    Z -- Nei --> AA[Koordiner med lege om bestilling og velg passende dag og stue] --> O
+
+    %% Slutt
+    S --> AB[Ferdig]

@@ -1,0 +1,44 @@
+graph TD
+  %% Felles kjerneflyt
+  A[Henvisning mottas] --> B[Sekretaer kontrollerer innhold]
+  B --> C{Riktig seksjon eller fag}
+  C -- Ja --> D[Vurdering av lege - poliklinikk]
+  C -- Nei --> C2[Rett seksjon eller fag og ruter til rett arbeidsgruppe] --> D
+  D --> E{Operasjon indikert}
+  E -- Nei --> F[Avslutt eller oppfolging uten operasjon]
+  E -- Ja --> G[Formell beslutning om operasjon]
+  G --> H[Planlegger kobler henvisning og operasjon]
+  H --> I[Kontroller metadata - omsorgsnivaa avdeling lokasjon diagnosegruppe kontakt]
+  I --> J{Direkte time eller tentativ maaned}
+  J -- Direkte time --> K[Finn ledig slot eller stue]
+  K --> L[Sett operator utstyr start og slutt]
+  L --> M[Innkallingsbrev]
+  M --> N[Paa operasjonsprogram]
+  J -- Tentativ maaned --> V1[Sett tentativ maaned]
+  V1 --> V2[Ventelistebrev]
+  V2 --> V3[Hent fra venteliste ved kapasitet]
+  V3 --> L
+  I --> Q{Uklart eller uvanlig - feil operator eller indikasjon}
+  Q -- Ja --> R[Avklar med lege - gulapp - for brev og plan]
+  R --> I
+  Q -- Nei --> J
+  L --> Z{Riktig utstyr program stue}
+  Z -- Ja --> M
+  Z -- Nei --> Z2[Koordiner med lege og velg passende dag eller stue] --> K
+
+  %% Gren ORT - Vilde
+  O1[Operatorbeslutning fylles ut av lege] --> O2[Operatorbeslutning til LHK mappe]
+  O2 --> O3[Arbeidsgruppe Ortelektivoperasjon Tromso]
+  O3 --> H
+
+  %% Gren GYN - Tove
+  G0[KVIFO mottak - sekretarer tommer mottakspostkasse pa tvers av lokasjon] --> G1{Fode eller kvinnesykdom eller kvinnekreft}
+  G1 -- Fode --> G1A[Send til jordmor arbeidsgruppe] --> D
+  G1 -- Kvinnesykdom eller kvinnekreft --> D
+  D --> G2[Poliklinikknotat med operasjonsbeskjed]
+  G2 --> G3[Sekretaer oppretter sekundaerhenvisning]
+  G3 --> G4[Lege setter diagnosegruppe prioritet uker og omsorgsnivaa]
+  G4 --> H
+  V3 --> G5[Grouper like inngrep - TVT dager og tre laparoskopier per dag]
+  G5 --> G6[Matche kirurg kompetanse og blokk eller ukeplan]
+  G6 --> K

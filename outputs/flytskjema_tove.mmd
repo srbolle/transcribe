@@ -1,0 +1,50 @@
+graph TD
+    %% Henvisning og mottak (KVIFO)
+    A[Henvisning mottas - KVIFO mottak] --> B[Sekretaer gjennomgaar henvisning]
+    B --> C{Riktig seksjon?}
+    C -- Graviditet/fode --> D[Endre seksjon til FODE og send til jordmor-arbeidsgruppe]
+    C -- Kvinnesykdom/kvinnekreft --> E[Sett seksjon Kvinnesykdom eller Kvinnekreft]
+
+    D --> F[Arbeidsgruppe jordmor - vurdering]
+    E --> G[Arbeidsgruppe lege Gyn - vurdering]
+
+    %% Vurdering i poliklinikk
+    G --> H[Poliklinikk konsultasjon]
+    H --> I{Operasjon indikert?}
+    I -- Nei --> J[Avslutt/oppfolging uten operasjon]
+    I -- Ja --> K[Legediktat poliklinisk notat med beskjed om operasjon]
+
+    %% Sekundaerhenvisning opprettes av sekretaer
+    K --> L[Opprett sekundaerhenvisning fra henvisningsbildet]
+    L --> M[Sekundaerhenvisning til lege arbeidsgruppe for vurdering]
+
+    %% Lege fyller ut styrende felter
+    M --> N[Lege vurderer sekundaerhenvisning og setter diagnosegruppe prioritet uker og omsorgsnivaa heldoegn dagkir DP]
+
+    %% Planlegger overtar
+    N --> O[Tilbake til sekretaer og planlegger - henvisning til oppfoelging]
+    O --> P{Hvor raskt?}
+    P -- <= ca 4 uker --> Q[Direkte oppsett paa operasjonsprogram uten ventelistebrev]
+    P -- mer enn ca 4 uker --> R[Sett tentativ maaned og send ventelistebrev]
+
+    %% Venteliste og uttak
+    R --> S[Pasient paa venteliste - sekundaerhenv]
+    S --> T[Planlegger henter fra venteliste etter prioritet og diagnosegruppe]
+
+    %% Kapasitet og blokkplan
+    T --> U[Match med kapasitet - teambok ukeplan stue-tilgang]
+    U --> V[Grouper like inngrep - for eksempel TVT-dager og tre laparoskopier per dag - for effektivitet]
+    V --> W[Velg riktig kirurg ut fra kompetanse og ventelistebehov]
+
+    %% Sjekkpunkter og bindinger
+    W --> X[Opprett operasjonsmoete eller booking med start og slutt stue operator]
+    X --> Y[Knytt henvisning til operatorbeslutning]
+    Y --> Z[Send innkallingsbrev og oppdater informasjon, lenker og fraser]
+
+    %% Unntak og preempter
+    V --> V2{Akutte eller fortrinnssaker - spontanabort eller utskrapning}
+    V2 -- Ja --> X
+    V2 -- Nei --> X
+
+    %% Slutt
+    Z --> AA[Paa operasjonsprogram]
