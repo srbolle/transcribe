@@ -3,48 +3,66 @@
 ```{mermaid}
 flowchart TD
   %% Vurdering av primærhenvisning
-  A([Primærhenvisning])
-  B[Kvalitetssjekk]
-  C[Legevurdering]
-  D{Oppfølging}
-  F([Slutt])
+  subgraph "Primærvurdering"
+    A([Primærhenvisning])
+    B[Kvalitetssjekk]
+    C[Legevurdering]
+    D{Oppfølging}
+    F([Slutt])
+
+    A --> B
+    B --> C
+    C --> D
+    D --> F
+  end
 
   %% Poliklinikk
-  G[Legevurdering]
-  H(Sekundærhenvisning)
-  I{Operasjon?}
-  J([Slutt])
-  K(Legevurdering)
+  subgraph "Poliklinikk"
+    G[Legevurdering]
+    H(Sekundærhenvisning)
+    I{Operasjon?}
+    J([Slutt])
+    K(Legevurdering)
+
+    D -->|Til poliklinik| G
+    G --> I
+    I -->|Nei| J
+    I -. Ja .-> H
+    H -.-> K
+  end
 
   %% Etterarbeid
-  E[Kvalitetssjekk]
-  L{OK?}
-  M[Avklar med lege]
-  N{Direkte?}
-  O[Direkteliste]
-  P[Tentativ måned \n Venteliste \n Ventelistebrev]
-  
+  subgraph "Etterarbeid"
+    D -->|Direkte til op.| E
+    E[Kvalitetssjekk]
+    L{OK?}
+    M[Avklar med lege]
+    N{Direkte?}
+    O[Direkteliste]
+    P[Tentativ måned \n Venteliste \n Ventelistebrev]
 
-  A --> B
-  B --> C
-  C --> D
-  D -->|Direkte til op.| E
-  D -->|Til poliklinik| G
-  D --> F
-  G --> I
-  I -->|Ja| E
-  I -->|Nei| J
-  I -. Ja .-> H
-  H -.-> K
-  K -.-> E
+    I -->|Ja| E
+    K -.-> E
+    E --> L
+    L -->|Nei| M
+    L -->|Ja| N
+    M e1@--> E
+    N -->|Ja| O
+    N -->|Nei| Pd
+  end
 
-E --> L
-L -->|Nei| M
-L -->|Ja| N
-M --> E
-N -->|Ja| O
-N -->|Nei| P
+  style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
 
+  %% Class assignments
+  class Primærvurdering input
+  class Etterarbeid input
+  class J,F layout
+
+  %% Styles
+  classDef input fill:#fdfdfd,stroke:#ccc,stroke-width:1px,font-size:12px,rx:4,ry:4
+  classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
+  classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
+  classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
 
 ```
 
