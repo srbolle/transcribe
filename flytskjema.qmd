@@ -1,6 +1,11 @@
 # Ventelisteansvarlig
 
 ```{mermaid}
+---
+config:
+  flowchart:
+    curve: linear
+---
 flowchart TD
   %% Vurdering av primærhenvisning
   subgraph "Primærvurdering"
@@ -39,23 +44,22 @@ flowchart TD
     M[Avklar med lege]
     N{Direkte?}
     O[Direkteliste]
-    P[Tentativ måned \n Venteliste \n Ventelistebrev]
+    P[Tentativ måned, Venteliste, Ventelistebrev]
 
     I -->|Ja| E
     K -.-> E
     E --> L
     L -->|Nei| M
     L -->|Ja| N
-    M e1@--> E
+    M --> E
     N -->|Ja| O
-    N -->|Nei| Pd
+    N -->|Nei| P
   end
 
-  style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
+  %% style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
 
   %% Class assignments
-  class Primærvurdering input
-  class Etterarbeid input
+  class Primærvurdering,Poliklinikk,Etterarbeid input
   class J,F layout
 
   %% Styles
@@ -63,7 +67,6 @@ flowchart TD
   classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
   classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
   classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
-
 ```
 
 
