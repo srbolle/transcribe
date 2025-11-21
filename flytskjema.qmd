@@ -1,0 +1,55 @@
+# Ventelisteansvarlig
+
+```{mermaid}
+flowchart TD
+  %% Vurdering av primærhenvisning
+  A([Primærhenvisning])
+  B[Kvalitetssjekk]
+  C[Legevurdering]
+  D{Oppfølging}
+  F([Slutt])
+
+  %% Poliklinikk
+  G[Legevurdering]
+  H(Sekundærhenvisning)
+  I{Operasjon?}
+  J([Slutt])
+  K(Legevurdering)
+
+  %% Etterarbeid
+  E[Kvalitetssjekk]
+  L{OK?}
+  M[Avklar med lege]
+  N{Direkte?}
+  O[Direkteliste]
+  P[Tentativ måned \n Venteliste \n Ventelistebrev]
+  
+
+  A --> B
+  B --> C
+  C --> D
+  D -->|Direkte til op.| E
+  D -->|Til poliklinik| G
+  D --> F
+  G --> I
+  I -->|Ja| E
+  I -->|Nei| J
+  I -. Ja .-> H
+  H -.-> K
+  K -.-> E
+
+E --> L
+L -->|Nei| M
+L -->|Ja| N
+M --> E
+N -->|Ja| O
+N -->|Nei| P
+
+
+```
+
+
+# Operasjonsplanlegger
+
+# Ventelisteansvarlig/operasjonsplanlegger
+
