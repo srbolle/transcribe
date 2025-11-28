@@ -1,0 +1,70 @@
+# Ventelisteansvarlig
+
+```{mermaid}
+---
+config:
+  flowchart:
+    curve: linear
+---
+flowchart TD
+  %% Vurdering av primærhenvisning
+  subgraph "Primærvurdering"
+    A([Primærhenvisning])
+    B[Kvalitetssjekk]
+    C[Legevurdering]
+    D{Oppfølging}
+    F([Slutt])
+
+    A --> B
+    B --> C
+    C --> D
+    D --> F
+  end
+
+  %% Poliklinikk
+  subgraph "Poliklinikk"
+    G[Legevurdering]
+    H(Sekundærhenvisning)
+    I{Operasjon?}
+    J([Slutt])
+    K(Legevurdering)
+
+    D -->|Til poliklinik| G
+    G --> I
+    I -->|Nei| J
+    I -. Ja .-> H
+    H -.-> K
+  end
+
+  %% Etterarbeid
+  subgraph "Etterarbeid"
+    D -->|Direkte til op.| E
+    E[Kvalitetssjekk]
+    L{OK?}
+    M[Avklar med lege]
+    N{Direkte?}
+    O[Direkteliste]
+    P[Tentativ måned, Venteliste, Ventelistebrev]
+
+    I -->|Ja| E
+    K -.-> E
+    E --> L
+    L -->|Nei| M
+    L -->|Ja| N
+    M --> E
+    N -->|Ja| O
+    N -->|Nei| P
+  end
+
+  %% style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
+
+  %% Class assignments
+  class Primærvurdering,Poliklinikk,Etterarbeid input
+  class J,F layout
+
+  %% Styles
+  classDef input fill:#fdfdfd,stroke:#ccc,stroke-width:1px,font-size:12px,rx:4,ry:4
+  classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
+  classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
+  classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
+```
