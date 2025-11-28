@@ -32,7 +32,7 @@ flowchart TD
     J([Slutt])
     K(Legevurdering)
 
-    D -->|Til poliklinik| G
+    D -->|Til poliklinikk| G
     G --> I
     I -->|Nei| J
     I -. Ja .-> H
