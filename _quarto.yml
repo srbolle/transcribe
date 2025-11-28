@@ -1,0 +1,3 @@
+project:
+  type: website      # or "default" if you’re not using website features
+  output-dir: _quarto_rendered  # or e.g. "../docs/flytskjema"
