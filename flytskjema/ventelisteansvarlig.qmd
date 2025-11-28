@@ -59,12 +59,12 @@ flowchart TD
   %% style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
 
   %% Class assignments
-  class Primærvurdering,Poliklinikk,Etterarbeid input
-  class J,F layout
+  class Primærvurdering,Poliklinikk,Etterarbeid groups
+  class A,J,F start_end
 
   %% Styles
-  classDef input fill:#fdfdfd,stroke:#ccc,stroke-width:1px,font-size:12px,rx:4,ry:4
+  classDef groups fill:#fdfdfd,stroke:#ccc,stroke-width:1px,font-size:12px,rx:4,ry:4
   classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
   classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
-  classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
+  classDef start_end fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
 ```
