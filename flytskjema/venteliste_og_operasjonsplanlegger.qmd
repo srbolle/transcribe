@@ -1,7 +1,9 @@
 # Ventelisteansvarlig/operasjonsplanlegger
 
-
 ```{mermaid}
+%%| label: fig-venteliste
+%%| fig-cap: "Blå bokser: utføres av lege.\nGule bokser: utføres av sekretær/operasjonsplanlegger.\nStiplet linje og avrundede bokser: alternativ arbeidsflyt."
+
 ---
 config:
   flowchart:
@@ -58,10 +60,10 @@ flowchart TD
   subgraph "Operasjonsplanlegging"
     N -->|Ja| B2
 
-    A2[Sjekk status direkteliste, venteliste og kapasitet]
+    A2[Sjekk status 'direkteliste', venteliste og kapasitet]
     B2[Finn ledig slot/time]
     C2[Match kirurgikompetanse, ukeplaner, slot/stue og utstyr]
-    D2["Hent (ny) pasient fra direkteliste eller venteliste"]
+    D2["Hent (ny) pasient fra 'direkteliste eller venteliste"]
     E2[Kvalitetssjekk]
     F2{OK?}
     G2{< 4 uker?}
@@ -91,10 +93,15 @@ flowchart TD
   %% Class assignments
   class Primærvurdering,Poliklinikk,Etterarbeid,Operasjonsplanlegging input
   class J,F layout
+  class C,G,H,I,K lege
+  class A,J,F start_end
 
   %% Styles
+  classDef start_end fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
   classDef input fill:#fdfdfd,stroke:#ccc,stroke-width:1px,font-size:12px,rx:4,ry:4
   classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
   classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
   classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
+  classDef default fill:#fff7b3,stroke:#333,color:#000
+  classDef lege fill:#d6ebff,stroke:#333,color:#000
 ```

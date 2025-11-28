@@ -44,4 +44,5 @@ flowchart TD
   classDef button fill:#2e78f0,stroke:#1e60d4,color:#fff,font-weight:bold,rx:20,ry:20
   classDef decision fill:#ffffff,stroke:#444,stroke-width:2px,font-style:italic
   classDef layout fill:#fafafa,stroke:#ddd,stroke-dasharray: 2 2
+  classDef default fill:#fff7b3,stroke:#333,color:#000
 ```
