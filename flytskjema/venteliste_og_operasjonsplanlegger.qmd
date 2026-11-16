@@ -63,7 +63,7 @@ flowchart TD
     A2[Sjekk status 'direkteliste', venteliste og kapasitet]
     B2[Finn ledig slot/time]
     C2[Match kirurgikompetanse, ukeplaner, slot/stue og utstyr]
-    D2["Hent (ny) pasient fra 'direkteliste' eller 'venteliste'"]
+    D2["Hent (ny) pasient fra 'direkteliste' eller venteliste"]
     E2[Kvalitetssjekk]
     F2{OK?}
     G2{< 4 uker?}
