@@ -63,11 +63,10 @@ flowchart TD
     A2[Sjekk status 'direkteliste', venteliste og kapasitet]
     B2[Finn ledig slot/time]
     C2[Match kirurgikompetanse, ukeplaner, slot/stue og utstyr]
-    D2["Hent (ny) pasient fra 'direkteliste eller venteliste"]
+    D2["Hent (ny) pasient fra 'direkteliste' eller 'venteliste'"]
     E2[Kvalitetssjekk]
     F2{OK?}
     G2{< 4 uker?}
-    H2[Gullapp til ventelisteansvarlig]
     I2[Innkallingsbrev]
     J2[Telefon til pasient]
     K2[Sett pasient på programmet]
@@ -77,15 +76,13 @@ flowchart TD
     B2 --> C2
     C2 --> D2
     D2 --> E2
-    E2 --> F2
-    F2 -->|Ja| G2
-    F2 -->|Nei| H2
-    H2 --> D2
+    E2 --> G2
     G2 -->|Ja| J2
     G2 -->|Nei| I2
     J2 --> K2
     I2 --> K2
-    K2 --> D2
+    K2 --> F2
+    F2 -->|Ja| D2
   end
 
   %% style Poliklinikk fill:#fff,stroke:#333,stroke-width:4px
